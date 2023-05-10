@@ -4,8 +4,7 @@ CREATE TABLE passwords(
     id int,
     login text,
     password text,
-    created_at timestamp,
-    PRIMARY KEY (id)
+    created_at timestamp
 );
 -- +goose StatementEnd
 
