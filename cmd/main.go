@@ -26,14 +26,14 @@ func main() {
 	}
 	bot.Debug = true
 	fmt.Printf("Authorized on account %s\n", bot.Self.UserName)
-	//wh, err := tgbotapi.NewWebhook(WebhookURL)
-	//if err != nil {
-	//	log.Fatalf("NewWebhook failed: %s", err)
-	//}
-	//_, err = bot.Request(wh)
-	//if err != nil {
-	//	log.Fatalf("Setting Webhook failed: %s", err)
-	//}
+	wh, err := tgbotapi.NewWebhook(WebhookURL)
+	if err != nil {
+		log.Fatalf("NewWebhook failed: %s", err)
+	}
+	_, err = bot.Request(wh)
+	if err != nil {
+		log.Fatalf("Setting Webhook failed: %s", err)
+	}
 	updates := bot.ListenForWebhook("/")
 	http.HandleFunc("/state", func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("all is working"))
