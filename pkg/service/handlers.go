@@ -66,12 +66,13 @@ func (h *Handler) SaveLogin(upd tgbotapi.Update) {
 	pwd := CreatePassword()
 	err := h.Repo.SetLogin(userID, serviceName, pwd)
 	if err == nil {
-		msg := fmt.Sprintf("Созданный пароль для сервиса %s: %s", serviceName, pwd)
+		msg := fmt.Sprintf("Пароль для сервиса %s был сгенерирован ранее", serviceName)
 		h.SendMsg(upd, msg)
 		return
+
 	}
-	if strings.Contains(err.Error(), "duplicate key value violates unique constraint") {
-		msg := fmt.Sprintf("Пароль для сервиса %s был сгенерирован ранее", serviceName)
+	if strings.Contains(err.Error(), "ok") {
+		msg := fmt.Sprintf("Созданный пароль для сервиса %s: %s", serviceName, pwd)
 		h.SendMsg(upd, msg)
 		return
 	}

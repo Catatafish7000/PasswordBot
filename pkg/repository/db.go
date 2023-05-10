@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
@@ -38,6 +39,9 @@ func (r *repo) SetLogin(userID int64, serviceName string, pwd string) error {
 		return err
 	}
 	_, err := r.DB.Exec("INSERT INTO passwords (id,login,password,created_at) VALUES ($1,$2,$3,$4)", userID, serviceName, pwd, time.Now())
+	if err == nil {
+		err = errors.New("ok")
+	}
 	return err
 }
 
