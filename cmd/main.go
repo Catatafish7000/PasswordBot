@@ -17,6 +17,7 @@ const (
 )
 
 func main() {
+	//6009569817:AAGp-5LQ3Wft436L_ybiEtaotPVM0RHnoGY
 	db := repository.NewRepo()
 	cron := cron.New()
 	bot, err := tgbotapi.NewBotAPI(BotToken)
